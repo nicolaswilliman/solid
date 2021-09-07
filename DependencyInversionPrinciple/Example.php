@@ -2,17 +2,11 @@
 
 namespace Examples;
 
-class Mailer
+class UserController
 {
-}
-
-class SendWelcomeMessage
-{
-    /** @var Mailer */
-    private $mailer;
-
-    public function __construct(Mailer $mailer)
+    public function index()
     {
-        $this->mailer = $mailer;
+        $users = User::where('created_at', '>=', Carbon::yesterday())->get();
+        return response()->json($users);
     }
 }

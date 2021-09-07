@@ -2,32 +2,36 @@
 
 namespace Corrections;
 
-interface Mailer
+interface UserRepositoryInterface
 {
-    public function send();
+    public function getFromDate($date);
+    public function create(array $data);
 }
 
-class SmtpMailer implements Mailer
+class UserRepository implements UserRepositoryInterface
 {
-    public function send()
+    public function getFromDate($date)
     {
+        return User::where('created_at', '>=', $date)->get();
+    }
+
+    public function create(array $data)
+    {
+        $user = new User;
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->save();
+
+        return $user;
     }
 }
 
-class SendGridMailer implements Mailer
-{
-    public function send()
-    {
-    }
-}
 
-class SendWelcomeMessage
+class UserController
 {
-    /** @var Mailer */ 
-    private $mailer;
-
-    public function __construct(Mailer $mailer)
+    public function index(UserRepositoryInterface $repository)
     {
-        $this->mailer = $mailer;
+        $users = $repository->getFromDate(Carbon::yesterday());
+        return response()->json($users);
     }
 }
