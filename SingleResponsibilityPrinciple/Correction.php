@@ -1,12 +1,12 @@
 <?php
+require '../helper.php';
 
 class Post
 {
     public function __construct(
         private string $title,
         private string $text,
-    ) {
-    }
+    ) {}
 
     public function getTitle(): string
     {
@@ -48,15 +48,14 @@ class JsonFormatter implements PostFormatter
     }
 }
 
-class HtmlFormatter implements PostFormatter
-{
-    public function format(Post $post): string
-    {
-        return "<h1>{$post->getTitle()}</h1>\n<span>{$post->getText()}</span>";
-    }
-}
+// class HtmlFormatter implements PostFormatter
+// {
+//     public function format(Post $post): string
+//     {
+//         return "<h1>{$post->getTitle()}</h1>\n<span>{$post->getText()}</span>";
+//     }
+// }
 
 $post = new Post('Titulo', 'Texto');
-$html_formatter = new HtmlFormatter;
-echo "{$html_formatter->format($post)}\n";
-
+$json_formatter = new JsonFormatter;
+logToConsole($json_formatter->format($post));
