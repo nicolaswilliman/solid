@@ -26,9 +26,14 @@ class Post
         ];
     }
 
-    public function formatJson(): string
+    public function formatToJson(): string
     {
         return json_encode($this->getContent());
+    }
+
+    public function formatToHtml(): string
+    {
+        return "<h1>{$this->getTitle()}</h1>\n<span>{$this->getText()}</span>";
     }
 }
 
