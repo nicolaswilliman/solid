@@ -1,4 +1,7 @@
 <?php
+
+namespace Corrections;
+
 require '../helper.php';
 
 interface ClientType

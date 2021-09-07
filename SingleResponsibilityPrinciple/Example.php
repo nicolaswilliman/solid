@@ -1,4 +1,7 @@
 <?php
+
+namespace Examples;
+
 require '../helper.php';
 
 class Post
