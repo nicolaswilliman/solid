@@ -4,49 +4,26 @@ namespace Corrections;
 
 require '../helper.php';
 
-class Rectangle
+abstract class Bird
 {
-    public function __construct(
-        protected float $height,
-        protected float $width,
-    ) {
-    }
-
-    public function getArea(): float
+    public function eat(): void
     {
-        return $this->height * $this->width;
+        logToConsole('Toy comiendo');
     }
 }
 
-class Square extends Rectangle
+abstract class FlyingBird
 {
-    public function __construct(float $length)
+    public function fly(): void
     {
-        $this->height = $length;
-        $this->width = $length;
+        logToConsole('Toy volando');
     }
 }
 
-class RectangleTest
+class Parrot extends FlyingBird
 {
-    /** @var Rectangle */
-    private $rectangle;
-
-    public function __construct(Rectangle $rectangle)
-    {
-        $this->rectangle = $rectangle;
-    }
-
-    public function testArea()
-    {
-        if ($this->rectangle->getArea() == 20) {
-            logToConsole('Passed!');
-        } else {
-            logToConsole('It didn\'t passed :(');
-        }
-    }
 }
 
-$rectangle = new Square(4);
-$rectangle_test = new RectangleTest($rectangle);
-$rectangle_test->testArea();
+class Ostrich extends Bird
+{
+}

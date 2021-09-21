@@ -4,69 +4,37 @@ namespace Examples;
 
 require '../helper.php';
 
-
-
-class Rectangle
+abstract class Bird
 {
-    /** @var float */
-    protected $width;
-
-    /** @var float */
-    protected $height;
-
-    public function setHeight(float $height): void
+    public function fly(): void
     {
-        $this->height = $height;
+        logToConsole('Toy volando');
     }
 
-    public function setWidth(float $width): void
+    public function eat(): void
     {
-        $this->width = $width;
-    }
-
-    public function getArea(): float
-    {
-        return $this->height * $this->width;
+        logToConsole('Toy comiendo');
     }
 }
 
-class Square extends Rectangle
+class Parrot extends Bird
 {
-    public function setHeight(float $value): void
-    {
-        $this->width = $value;
-        $this->height = $value;
-    }
+}
 
-    public function setWidth(float $value): void
+class Ostrich extends Bird
+{
+    public function fly(): void
     {
-        $this->width = $value;
-        $this->height = $value;
+        throw new \Exception('Soy un avestruz, no puedo volar :(');
     }
 }
 
-class RectangleTest
-{
-    /** @var Rectangle */
-    private $rectangle;
+$birds = [
+    new Parrot,
+    new Ostrich,
+];
 
-    public function __construct(Rectangle $rectangle)
-    {
-        $this->rectangle = $rectangle;
-    }
-
-    public function testArea()
-    {
-        $this->rectangle->setHeight(4);
-        $this->rectangle->setWidth(5);
-        if ($this->rectangle->getArea() == 20) {
-            logToConsole('Passed!');
-        } else {
-            logToConsole('It didn\'t passed :(');
-        }
-    }
+/** @var Bird $bird */
+foreach ($birds as $bird) {
+    $bird->fly();
 }
-
-$rectangle = new Rectangle;
-$rectangle_test = new RectangleTest($rectangle);
-$rectangle_test->testArea();
