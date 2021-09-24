@@ -1,5 +1,4 @@
 <?php
-require '../helper.php';
 
 class Post
 {
@@ -25,11 +24,6 @@ class Post
             'text' => $this->text,
         ];
     }
-
-    public function formatJson(): string
-    {
-        return json_encode($this->getContent());
-    }
 }
 
 interface PostFormatter
@@ -48,14 +42,10 @@ class JsonFormatter implements PostFormatter
     }
 }
 
-// class HtmlFormatter implements PostFormatter
-// {
-//     public function format(Post $post): string
-//     {
-//         return "<h1>{$post->getTitle()}</h1>\n<span>{$post->getText()}</span>";
-//     }
-// }
-
-$post = new Post('Titulo', 'Texto');
-$json_formatter = new JsonFormatter;
-logToConsole($json_formatter->format($post));
+class HtmlFormatter implements PostFormatter
+{
+    public function format(Post $post): string
+    {
+        return "<h1>{$post->getTitle()}</h1>\n<span>{$post->getText()}</span>";
+    }
+}

@@ -1,40 +1,55 @@
 <?php
 
-namespace Corrections;
-
-require '../helper.php';
-
-interface ClientType
+interface PayableInterface
 {
-    public function getDiscount(float $amount): float;
+    public function pay();
 }
 
-class SeniorClient implements ClientType
+class CreditPayment implements PayableInterface
 {
-    public function getDiscount(float $amount): float
+    public function pay()
     {
-        return $amount * 0.25;
+        // process credit card payment
     }
 }
 
-class PregnantClient implements ClientType
+class PaypalPayment implements PayableInterface
 {
-    public function getDiscount(float $amount): float
+    public function pay()
     {
-        return $amount * 0.15;
+        // process paypal payment
     }
 }
 
-class Checkout
+class MercadoPagoPayment implements PayableInterface
 {
-    public function getTotalToPay(float $amount, ClientType $clientType): float
+    public function pay()
     {
-        $discount = $clientType->getDiscount($amount);
-        $total = $amount - $discount;
-        return $total;
+        // process mercado pago payment
     }
 }
 
-$checkout = new Checkout;
-logToConsole($checkout->getTotalToPay(100, new SeniorClient));
-logToConsole($checkout->getTotalToPay(100, new PregnantClient));
+class PaymentFactory
+{
+    public function initializePayment($type): PayableInterface
+    {
+        if ($type === 'credit') {
+            return new CreditPayment;
+        } elseif ($type === 'paypal') {
+            return new PaypalPayment;
+        } elseif ($type === 'mercadopago') {
+            return new MercadoPagoPayment;
+        }
+    }
+}
+
+
+
+class PaymentController
+{
+    public function pay(Request $request, PaymentFactory $paymentFactory)
+    {
+        $payment = $paymentFactory->initializePayment($request->type);
+        $payment->pay();
+    }
+}

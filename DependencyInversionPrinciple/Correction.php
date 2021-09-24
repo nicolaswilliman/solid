@@ -1,7 +1,5 @@
 <?php
 
-namespace Corrections;
-
 interface UserRepositoryInterface
 {
     public function getFromDate($date);

@@ -1,50 +1,42 @@
 <?php
 
-namespace Examples;
-
-require '../helper.php';
-
-interface Worker
-{
-    public function work(): void;
-    public function eat(): void;
+interface Repository {
+    public function find($id): ?Model;
+    public function all(): Collection;
+    public function create(array $data): Model;
+    public function update(array $data, $id): Model;
+    public function delete($id): void;
 }
 
-class SimpleWorker implements Worker
+class UserRepository implements Repository 
 {
-    public function work(): void
+    public function find($id): ?Model
     {
-        logToConsole('SimpleWorker working');
+        return User::find($id);
     }
 
-    public function eat(): void
+    public function create(array $data): Model
     {
-        logToConsole('SimpleWorker eating');
+        return User::create($data);
     }
+
+    // ...
 }
 
-class SuperWorker implements Worker
+class LogRepository implements Repository
 {
-    public function work(): void
+    public function find($id): Model
     {
-        logToConsole('SuperWorker working');
+        return User::find($id);
     }
 
-    public function eat(): void
+    public function all(): Collection;
     {
-        logToConsole('SuperWorker working');
-    }
-}
-
-class Robot implements Worker
-{
-    public function work(): void
-    {
-        logToConsole('Robot working');
+        return User::all();
     }
 
-    public function eat(): void
+    public function delete($id)
     {
-        throw new \Exception("I'm a robot, I can't eat.");
+        throw new Exception('Los logs no pueden ser borrados.');
     }
 }

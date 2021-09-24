@@ -1,49 +1,32 @@
 <?php
 
-namespace Corrections;
-
-require '../helper.php';
-
-interface Workable
+interface StorableRepository
 {
-    public function work(): void;
+    public function create(array $data): Model;
 }
 
-interface Feedable
+interface ReadableRepository
 {
-    public function eat(): void;
+	public function find($id): ?Model;
+    public function all(): Collection;
 }
 
-class SimpleWorker implements Workable, Feedable
+interface DeletableRepository
 {
-    public function work(): void
-    {
-        logToConsole('SimpleWorker working');
-    }
-
-    public function eat(): void
-    {
-        logToConsole('SimpleWorker eating');
-    }
+    public function delete($id): void;
 }
 
-class SuperWorker implements Workable, Feedable
+interface UpdatableRepository
 {
-    public function work(): void
-    {
-        logToConsole('SuperWorker working');
-    }
-
-    public function eat(): void
-    {
-        logToConsole('SuperWorker working');
-    }
+    public function update(array $data, $id): Model;
 }
 
-class Robot implements Workable
+class UserRepository implements StorableRepository, ReadableRepository, DeletableRepositoryUpdatableRepository
 {
-    public function work(): void
-    {
-        logToConsole('Robot working');
-    }
+	// ...
+}
+
+class LogRepository implements StorableRepository, ReadableRepository
+{
+	// ...
 }

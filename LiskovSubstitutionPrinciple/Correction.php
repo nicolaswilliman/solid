@@ -1,14 +1,10 @@
 <?php
 
-namespace Corrections;
-
-require '../helper.php';
-
 abstract class Bird
 {
     public function eat(): void
     {
-        logToConsole('Toy comiendo');
+        echo 'Toy comiendo';
     }
 }
 
@@ -16,7 +12,7 @@ abstract class FlyingBird
 {
     public function fly(): void
     {
-        logToConsole('Toy volando');
+        echo 'Toy volando';
     }
 }
 

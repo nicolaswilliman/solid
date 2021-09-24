@@ -1,7 +1,5 @@
 <?php
 
-namespace Examples;
-
 class UserController
 {
     public function index()

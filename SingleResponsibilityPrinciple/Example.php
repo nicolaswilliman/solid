@@ -1,9 +1,5 @@
 <?php
 
-namespace Examples;
-
-require '../helper.php';
-
 class Post
 {
     public function __construct(
@@ -34,11 +30,8 @@ class Post
         return json_encode($this->getContent());
     }
 
-    // public function formatToHtml(): string
-    // {
-    //     return "<h1>{$this->getTitle()}</h1>\n<span>{$this->getText()}</span>";
-    // }
+    public function formatToHtml(): string
+    {
+        return "<h1>{$this->getTitle()}</h1>\n<span>{$this->getText()}</span>";
+    }
 }
-
-$post = new Post('Titulo', 'Texto');
-logToConsole($post->formatToJson());

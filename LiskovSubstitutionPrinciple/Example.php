@@ -1,31 +1,28 @@
 <?php
 
-namespace Examples;
-
-require '../helper.php';
-
 abstract class Bird
 {
     public function fly(): void
     {
-        logToConsole('Toy volando');
+        echo 'Estoy volando!';
     }
 
     public function eat(): void
     {
-        logToConsole('Toy comiendo');
+        echo 'Estoy comiendo!';
     }
 }
 
 class Parrot extends Bird
 {
+
 }
 
 class Ostrich extends Bird
 {
     public function fly(): void
     {
-        throw new \Exception('Soy un avestruz, no puedo volar :(');
+        throw new Exception('Soy un avestruz, no puedo volar :(');
     }
 }
 
@@ -34,7 +31,6 @@ $birds = [
     new Ostrich,
 ];
 
-/** @var Bird $bird */
 foreach ($birds as $bird) {
     $bird->fly();
 }
