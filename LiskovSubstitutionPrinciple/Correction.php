@@ -4,15 +4,15 @@ abstract class Bird
 {
     public function eat(): void
     {
-        echo 'Toy comiendo';
+        echo 'Estoy comiendo!';
     }
 }
 
-abstract class FlyingBird
+abstract class FlyingBird extends Bird
 {
     public function fly(): void
     {
-        echo 'Toy volando';
+        echo 'Estoy volando!';
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-abstract class Bird
+class Bird
 {
     public function fly(): void
     {
@@ -22,7 +22,7 @@ class Ostrich extends Bird
 {
     public function fly(): void
     {
-        throw new Exception('Soy un avestruz, no puedo volar :(');
+        throw new Exception('Soy un avestruz, no puedo volar..');
     }
 }
 

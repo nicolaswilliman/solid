@@ -14,18 +14,29 @@ class StoreUserRequest extends FormRequest
 
 class UserService
 {
-	public function create($userData): User
+	public function create(array $userData): User
 	{
 		return User::create($userData);
 	}
 }
 
 
+class UserResource extends JsonResource
+{
+	public function toArray()
+	{
+		return [
+			'user_name' => $this->name,
+			'email' => $this->email,
+		];
+	}
+}
+
 class UserController 
 {
 	public function store(StoreUserRequest $request, UserService $userService)
 	{
-		$user = $userService->create($request->validated())
-		return response()->json(['user' => $user], 201);
+		$user = $userService->create($request->validated());
+		return new UserResource($user);
 	}
 }
