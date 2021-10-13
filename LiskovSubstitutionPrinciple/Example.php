@@ -26,6 +26,11 @@ class Ostrich extends Bird
     }
 }
 
+function foo(Bird $bird) {
+    // do something
+}
+
+
 $birds = [
     new Parrot,
     new Ostrich,
