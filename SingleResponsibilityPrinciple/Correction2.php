@@ -16,7 +16,12 @@ class UserService
 {
 	public function create(array $userData): User
 	{
-		return User::create($userData);
+		$user = new User;
+		$user->name = $userData['name'];
+		$user->email = $userData['email'];
+		$user->password = bcrypt($userData['password']);
+		$user->save();
+		return $user;
 	}
 }
 

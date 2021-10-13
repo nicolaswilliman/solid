@@ -21,7 +21,7 @@ interface UpdatableRepository
     public function update(array $data, $id): Model;
 }
 
-class UserRepository implements StorableRepository, ReadableRepository, DeletableRepositoryUpdatableRepository
+class UserRepository implements StorableRepository, ReadableRepository, DeletableRepository, UpdatableRepository
 {
 	// ...
 }

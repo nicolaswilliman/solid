@@ -38,5 +38,6 @@ class LogRepository implements Repository
     public function delete($id)
     {
         throw new Exception('Los logs no pueden ser borrados.');
+        // O simplemente lo podemos dejar vacio..
     }
 }

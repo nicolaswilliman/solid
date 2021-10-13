@@ -1,6 +1,6 @@
 <?php
 
-class Bird
+abstract class Bird
 {
     public function fly(): void
     {
